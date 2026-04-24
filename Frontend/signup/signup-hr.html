@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Admin Sign Up - RecruitAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+<div class="container-fluid p-0">
+    <div class="row g-0 main-container">        
+        <div class="col-md-5 side-image d-none d-md-flex text-center">
+            <h1 class="display-5 fw-bold">HR Admin</h1>
+            <p class="lead">Manage recruitment pipelines and <br> access advanced talent analytics.</p>
+        </div>
+        <div class="col-md-7 selection-section">
+            <div class="signup-card">                
+                <div class="brand-logo">Recruit <span>AI</span></div>                
+                <h2 class="mb-1 fw-bold" style="color: var(--text-main);">HR Registration</h2>
+                <p class="text-muted mb-4 small">Set up your HR account to start managing candidates.</p>
+                <form id="hrSignupForm" class="row g-3" novalidate>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">Full Name</label>
+                        <input type="text" id="hrFullName" class="form-control" placeholder="Ex: Ahmed Ali" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold"> ID</label>
+                        <input type="text" id="employeeId" class="form-control" placeholder="14 digit number" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small fw-bold">Official Email Address</label>
+                        <input type="email" id="hrEmail" class="form-control" placeholder="ahmed@company.com" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small fw-bold">Department</label>
+                        <select id="department" class="form-select form-control" required>
+                            <option value="" selected disabled>Select your department</option>
+                            <option value="talent">Talent Acquisition</option>
+                            <option value="technical">Technical Recruitment</option>
+                            <option value="general">General HR</option>
+                            <option value="executive">Executive Search</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">Password</label>
+                        <div class="input-group">
+                            <input type="password" id="hrPassword" class="form-control" placeholder="••••••••" required>
+                            <button class="btn btn-outline-secondary border-start-0" type="button" id="toggleHrPass" style="border-radius: 0 12px 12px 0; border-color: #E0E5F2;">
+                                <i class="bi bi-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">Confirm Password</label>
+                        <div class="input-group">
+                            <input type="password" id="hrConfirmPassword" class="form-control" placeholder="••••••••" required>
+                            <button class="btn btn-outline-secondary border-start-0" type="button" id="toggleHrConfirm" style="border-radius: 0 12px 12px 0; border-color: #E0E5F2;">
+                                <i class="bi bi-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <button type="submit" id="hrBtn" class="btn btn-primary w-100 shadow-sm">
+                            <span id="hrBtnText">Authorize & Register</span>
+                            <span id="hrLoader" class="spinner-border spinner-border-sm d-none"></span>
+                        </button>
+                    </div>
+                </form>
+                <div class="text-center mt-4">
+                    <p class="text-muted small">Not a HR Admin?
+                        <a href="signup.html" class="fw-bold text-decoration-none" style="color: var(--primary-color);">Change role </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="hr-signup.js"></script>
+</body>
+</html>

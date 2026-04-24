@@ -1,0 +1,62 @@
+:root {
+         --primary-color: #4318FF;
+         --text-main: #2B3674;
+}
+body, html {
+        height: 100%;
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #fff;
+        overflow: hidden;
+ }
+.main-container {
+       height: 100vh;
+      display: flex;
+}
+.side-image {
+    background: linear-gradient(rgba(67, 24, 255, 0.5), rgba(67, 24, 255, 0.5)), 
+                url('../../assets/photo.png'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 40px;
+    height: 100vh; 
+}
+.login-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f7fe;
+}
+.login-card {
+    width: 100%;
+     max-width: 420px;
+    padding: 2rem;
+}
+.brand-logo {
+    color: var(--primary-color);
+   font-weight: 800;
+   font-size: 28px;
+   margin-bottom: 30px;
+}
+.form-control {
+   padding: 12px;
+   border-radius: 12px;
+   border: 1px solid #E0E5F2;
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+@media (max-width: 768px) {
+  .side-image {
+        display: none;
+    }
+}

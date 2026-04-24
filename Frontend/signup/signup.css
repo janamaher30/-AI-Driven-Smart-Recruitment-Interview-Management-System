@@ -1,0 +1,103 @@
+:root {
+    --primary-color: #4318FF;
+    --text-main: #2B3674;
+    --bg-light: #f4f7fe;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; 
+}
+.main-container {
+    height: 100vh;
+}
+.side-image {
+    background: linear-gradient(rgba(67, 24, 255, 0.5), rgba(67, 24, 255, 0.5)), 
+                url('../../assets/photo.png'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 40px;
+}
+.selection-section {
+    display: flex;
+    align-items: flex-start; 
+    justify-content: center;
+    background-color: var(--bg-light);
+    height: 100vh;
+    overflow-y: auto;
+    padding-top: 60px; 
+    padding-bottom: 60px;
+}
+.signup-card {
+    width: 100%;
+    max-width: 550px;
+    padding: 0 40px; 
+    display: flex;
+    flex-direction: column;
+    margin-top: 0; 
+}
+.brand-logo {
+    color: var(--primary-color);
+    font-weight: 800;
+    font-size: 30px;
+    letter-spacing: -0.5px;
+    margin-bottom: 30px; 
+    display: flex;
+    align-items: center;
+}
+.role-card {
+    background: #fff;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.role-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(67, 24, 255, 0.1);
+}
+.icon-box {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+@media (max-width: 768px) {
+    .side-image { display: none; }
+    html, body { overflow-y: auto; }
+}
+.selection-section {
+    overflow-y: auto; 
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.form-control {
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #E0E5F2;
+    background-color: #ffffff;
+}
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25 shadow rgba(67, 24, 255, 0.1);
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-primary:hover {
+    background-color: #3311CC;
+    transform: translateY(-2px);
+}
