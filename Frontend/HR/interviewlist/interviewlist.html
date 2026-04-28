@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interviews - RecruitAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="inteviewlist.css">
+</head>
+<body>
+
+    <div class="d-flex">
+        <aside class="sidebar p-4 d-flex flex-column">
+            <div class="logo mb-5">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary text-white rounded-3 p-2 me-2"><i class="bi bi-intersect"></i></div>
+                    <div>
+                        <h5 class="fw-bold mb-0">RecruitAI</h5>
+                        <small class="text-muted fw-800 x-small text-uppercase">HR Intelligence</small>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav flex-column mb-auto">
+                <a class="nav-link" href="../dashboard/dashboard.html"><i class="bi bi-speedometer2 me-3"></i>Dashboard</a>
+                <a class="nav-link" href="../joblist/joblist.html"><i class="bi bi-briefcase me-3"></i>Jobs</a>
+                <a class="nav-link" href="../candidatelist/candidatelist.html"><i class="bi bi-people me-3"></i>Candidates</a>
+                <a class="nav-link active" href="interviewlist.html"><i class="bi bi-calendar4-event me-3"></i>Interviews</a>
+                <a class="nav-link" href="../feedback/feedback.html"><i class="bi bi-chat-left-dots me-3"></i>Feedback</a>
+                <a class="nav-link" href="../offer/offer.html"><i class="bi bi-file-earmark-text me-3"></i>Offer</a>
+            </nav>
+        </aside>
+
+        <main class="flex-grow-1 p-4">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-1">
+                            <li class="breadcrumb-item x-small fw-800 text-muted text-uppercase">Scheduling</li>
+                            <li class="breadcrumb-item x-small fw-800 text-primary text-uppercase active">Interview Calendar</li>
+                        </ol>
+                    </nav>
+                    <h2 class="fw-bold mb-0 text-dark">Upcoming Interviews</h2>
+                </div>
+                <div class="d-flex gap-3">
+                    <button class="btn btn-outline-dark px-4 rounded-3 fw-600"><i class="bi bi-calendar-check me-2"></i>My Schedule</button>
+                    <button class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm"><i class="bi bi-plus-lg me-2"></i>Schedule Interview</button>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-8">
+                    <div class="card border-0 shadow-sm rounded-4 text-white p-4 h-100" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <span class="badge bg-white text-primary mb-3 px-3 py-2 rounded-pill fw-bold">NEXT INTERVIEW</span>
+                                <h2 class="fw-800 mb-1">Ahmed Khalid</h2>
+                                <p class="mb-4 opacity-75"><i class="bi bi-briefcase me-2"></i>Senior Product Engineer • <i class="bi bi-clock ms-2 me-1"></i> 10:00 AM (In 15 mins)</p>
+                                
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-white fw-bold px-4 rounded-3 text-primary bg-white">
+                                        <i class="bi bi-camera-video-fill me-2"></i>Join Meeting
+                                    </button>
+                                    <button class="btn btn-outline-light fw-600 px-4 rounded-3">
+                                        View Resume
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="d-none d-lg-block">
+                                <i class="bi bi-calendar2-check opacity-25" style="font-size: 80px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm rounded-4 bg-white p-4 h-100">
+                        <h6 class="fw-bold text-dark mb-4">Today's Distribution</h6>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small fw-600 text-muted">Technical Rounds</span>
+                                <span class="small fw-bold text-primary">60%</span>
+                            </div>
+                            <div class="progress" style="height: 6px; border-radius: 10px;">
+                                <div class="progress-bar bg-primary" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small fw-600 text-muted">HR Screening</span>
+                                <span class="small fw-bold text-info">30%</span>
+                            </div>
+                            <div class="progress" style="height: 6px; border-radius: 10px;">
+                                <div class="progress-bar bg-info" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="ai-tip p-3 rounded-3 mt-auto" style="background-color: #f0f7ff; border-left: 4px solid #0d6efd;">
+                            <p class="x-small mb-0 text-primary fw-600 lh-sm">
+                                <i class="bi bi-lightbulb-fill me-1"></i> AI Tip: Ahmed's score is high in React but check his System Design.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="nav nav-pills mb-4 bg-white p-1 rounded-4 shadow-sm border d-inline-flex">
+                <li class="nav-item"><a class="nav-link active px-4" href="#">Upcoming <span class="badge ms-1 bg-white text-primary border">8</span></a></li>
+                <li class="nav-item"><a class="nav-link px-4" href="#">Completed</a></li>
+                <li class="nav-item"><a class="nav-link px-4" href="#">Past Due</a></li>
+            </ul>
+
+            <div class="table-card shadow-sm border bg-white rounded-4 overflow-hidden">
+                <table class="table mb-0 align-middle">
+                    <thead class="bg-light text-muted small fw-bold">
+                        <tr>
+                            <th class="ps-4 py-3">CANDIDATE</th>
+                            <th>INTERVIEW TYPE</th>
+                            <th>DATE & TIME</th>
+                            <th>INTERVIEWER</th>
+                            <th>AI SCORE</th>
+                            <th>STATUS</th>
+                            <th class="text-end pe-4">ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ps-4 py-3">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://i.pravatar.cc/150?u=12" class="candidate-img me-3">
+                                    <div>
+                                        <div class="fw-bold">Ahmed Khalid</div>
+                                        <div class="x-small text-muted">Senior React Dev</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="badge bg-soft-info text-info rounded-pill px-3 fw-600">Technical Round</span></td>
+                            <td>
+                                <div class="small fw-bold text-dark">Oct 28, 2026</div>
+                                <div class="x-small text-muted">10:00 AM - 11:00 AM</div>
+                            </td>
+                            <td>
+                                <div class="small fw-600 text-muted">Eng. Yasmine S.</div>
+                            </td>
+                            <td><div class="ai-badge bg-soft-success">94%</div></td>
+                            <td><span class="status-pill status-interview">Confirmed</span></td>
+                            <td class="text-end pe-4">
+                                <div class="d-flex justify-content-end gap-2">
+                                    <button class="btn btn-primary btn-sm rounded-3 px-3 fw-bold"><i class="bi bi-camera-video me-1"></i> Join</button>
+                                    <button class="btn btn-outline-success btn-sm rounded-3 px-3 fw-bold" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                                        <i class="bi bi-chat-right-text me-1"></i> Feedback
+                                    </button>
+                                    <div class="dropdown">
+                                        <button class="btn btn-light btn-sm rounded-3 px-2 border" data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm rounded-3">
+                                            <li><a class="dropdown-item small" href="#" data-bs-toggle="modal" data-bs-target="#rescheduleModal"><i class="bi bi-clock me-2"></i>Reschedule</a></li>
+                                            <li><a class="dropdown-item small text-danger" href="#"><i class="bi bi-x-circle me-2"></i>Cancel</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal fade" id="feedbackModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 p-2">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="fw-bold mb-0">Submit Assessment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="small text-muted mb-4">Complete the technical evaluation for Ahmed Khalid.</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+<div class="modal fade" id="rescheduleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header border-0 px-4 pt-4">
+                <h5 class="fw-bold mb-0">Reschedule Interview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p class="small text-muted mb-4">Select a new date and time for <strong>Ahmed Khalid</strong>. We'll notify the candidate automatically.</p>
+                
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">New Date</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0"><i class="bi bi-calendar3"></i></span>
+                            <input type="date" class="form-control bg-light border-0" id="rescheduleDate" value="2026-04-28">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">New Time</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0"><i class="bi bi-clock"></i></span>
+                            <input type="time" class="form-control bg-light border-0" id="rescheduleTime" value="10:00">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 p-3 rounded-3" style="background-color: #fff9eb; border: 1px solid #ffeeba;">
+                    <p class="x-small mb-0 text-warning-emphasis">
+                        <i class="bi bi-exclamation-triangle-fill me-1"></i> Check for conflicts: Ahmed has another session at 2:00 PM.
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer border-0 p-4">
+                <button class="btn btn-light px-4 rounded-3 fw-bold" data-bs-dismiss="modal">Keep Original</button>
+                <button class="btn btn-primary px-4 rounded-3 fw-bold" onclick="updateInterviewDate()">Confirm Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="interviewlist.js"></script>
+</body>
+</html>
