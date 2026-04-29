@@ -1,0 +1,68 @@
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+.sidebar {
+    width: 360px;
+    height: 100vh;
+    background: white;
+    border-right: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+}
+
+.nav-link {
+    color: #64748b;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 12px;
+    margin-bottom: 5px;
+    transition: 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #f1f5f9;
+    color: #0d6efd;
+}
+
+.nav-link.active {
+    background-color: #eff6ff;
+    color: #0d6efd;
+}
+
+.x-small { font-size: 0.7rem; letter-spacing: 0.5px; }
+.fw-800 { font-weight: 800; }
+
+.btn-outline-dashed {
+    border: 1px dashed #cbd5e1;
+    color: #64748b;
+    background: transparent;
+}
+
+.form-select, .form-control {
+    transition: all 0.2s;
+}
+
+.form-select:focus, .form-control:focus {
+    background-color: #fff !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #0d6efd !important;
+}
+
+.ai-summary {
+    border-left: 4px solid #0d6efd;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    padding: 10px 24px;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(13, 110, 253, 0.3);
+}

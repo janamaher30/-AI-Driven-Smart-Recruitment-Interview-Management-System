@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offer Management - RecruitAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="offer.css">
+</head>
+<body>
+
+    <div class="d-flex">
+        <aside class="sidebar p-4 d-flex flex-column">
+            <div class="logo mb-5">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary text-white rounded-3 p-2 me-2"><i class="bi bi-intersect"></i></div>
+                    <div>
+                        <h5 class="fw-bold mb-0">RecruitAI</h5>
+                        <small class="text-muted fw-800 x-small text-uppercase">HR Intelligence</small>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav flex-column mb-auto">
+                <a class="nav-link" href="../dashboard/dashboard.html"><i class="bi bi-speedometer2 me-3"></i>Dashboard</a>
+                <a class="nav-link" href="../joblist/joblist.html"><i class="bi bi-briefcase me-3"></i>Jobs</a>
+                <a class="nav-link" href="../candidatelist/candidatelist.html"><i class="bi bi-people me-3"></i>Candidates</a>
+                <a class="nav-link" href="../interviewlist/interviewlist.html"><i class="bi bi-calendar4-event me-3"></i>Interviews</a>
+                <a class="nav-link" href="../feedback/feedback.html"><i class="bi bi-chat-left-dots me-3"></i>Feedback</a>
+                <a class="nav-link active" href="offer.html"><i class="bi bi-file-earmark-text me-3"></i>Offer</a>
+            </nav>
+        </aside>
+
+        <main class="flex-grow-1 p-4">
+            <div class="row align-items-center mb-4">
+                <div class="col-md-6">
+                    <h2 class="fw-bold mb-1">Offer Generation</h2>
+                    <p class="text-muted small">Select a qualified candidate to finalize their contract.</p>
+                </div>
+                <div class="col-md-6 d-flex justify-content-md-end gap-3">
+                    <div class="w-50">
+                        <label class="x-small fw-bold text-uppercase text-muted d-block mb-1">Select Candidate</label>
+                        <select class="form-select rounded-3 border-0 shadow-sm shadow-none bg-white p-2">
+                            <option selected>Ahmed Khalid (94%)</option>
+                            <option>Sarah Mansour (82%)</option>
+                            <option>Laila Hassan (96%)</option>
+                        </select>
+                    </div>
+                    <div class="align-self-end">
+                        <button class="btn btn-primary px-4 rounded-3 fw-bold shadow-sm">Send Offer</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                        <div class="text-center">
+                            <div class="position-relative d-inline-block mb-3">
+                                <img src="https://i.pravatar.cc/150?u=12" class="rounded-circle border border-4 border-white shadow-sm" width="100">
+                                <span class="position-absolute bottom-0 end-0 badge rounded-pill bg-success border border-2 border-white px-2 py-1 x-small">Top Pick</span>
+                            </div>
+                            <h5 class="fw-bold mb-1">Ahmed Khalid</h5>
+                            <p class="x-small text-muted mb-3">Senior React Developer</p>
+                            <div class="d-flex justify-content-around bg-light rounded-3 p-3 mb-3">
+                                <div class="text-center">
+                                    <div class="x-small text-muted">AI Score</div>
+                                    <div class="fw-bold text-primary">94%</div>
+                                </div>
+                                <div class="vr opacity-25"></div>
+                                <div class="text-center">
+                                    <div class="x-small text-muted">Ranking</div>
+                                    <div class="fw-bold text-dark">#1</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ai-summary p-3 bg-light rounded-3 border-start border-primary border-4">
+                            <h6 class="x-small fw-bold text-uppercase text-primary mb-2"><i class="bi bi-stars"></i> Decision Justification</h6>
+                            <p class="x-small text-muted mb-0">High technical proficiency and consistent communication.</p>
+                        </div>
+                    </div>
+
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
+                        <h6 class="fw-bold mb-3 x-small text-uppercase">Checklist Before Sending</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" checked id="c1">
+                            <label class="form-check-label small" for="c1">Background check completed</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" checked id="c2">
+                            <label class="form-check-label small" for="c2">Salary within budget range</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="c3">
+                            <label class="form-check-label small" for="c3">Legal department approval</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                        <h6 class="fw-bold mb-4 border-bottom pb-3">Contract Specifications</h6>
+                        <form>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label x-small fw-bold text-muted text-uppercase">Annual Gross Salary (EGP)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light border-0 rounded-start-3">£</span>
+                                        <input type="number" class="form-control border-0 bg-light p-2 shadow-none rounded-end-3" placeholder="600,000">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label x-small fw-bold text-muted text-uppercase">Notice Period (Days)</label>
+                                    <input type="number" class="form-control border-0 bg-light p-2 shadow-none rounded-3" placeholder="30">
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label x-small fw-bold text-muted text-uppercase d-block mb-2">Perks & Benefits</label>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span class="badge rounded-pill border text-dark p-2 px-3 fw-bold bg-light"><i class="bi bi-plus text-primary me-1"></i> Private Insurance</span>
+                                        <span class="badge rounded-pill border text-dark p-2 px-3 fw-bold bg-light"><i class="bi bi-plus text-primary me-1"></i> Stock Options</span>
+                                        <span class="badge rounded-pill border text-dark p-2 px-3 fw-bold bg-light"><i class="bi bi-plus text-primary me-1"></i> Annual Bonus</span>
+                                        <button type="button" class="btn btn-outline-dashed btn-sm rounded-pill x-small">+ Add New</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label x-small fw-bold text-muted text-uppercase">Custom Offer Letter Summary</label>
+                                    <textarea class="form-control border-0 bg-light p-3 shadow-none rounded-4" rows="6" placeholder="Write a professional message to the candidate..."></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
