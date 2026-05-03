@@ -308,13 +308,67 @@ const renderCandidates = (list) => {
     Called when user types in the search box.
     Filters candidates by name or role and re-renders the table.
 */
-const filterCandidates = (searchText) => {
-    const lower    = searchText.toLowerCase();
-    const filtered = data.candidates.filter(c =>
-        c.name.toLowerCase().includes(lower) ||
-        c.role.toLowerCase().includes(lower)
-    );
+// Tracks the currently active filters
+// So search + filter + status all work TOGETHER at the same time
+let activeFilters = {
+    search: '',
+    status: 'all'
+};
+
+
+/*
+    applyFilters()
+    Called by any filter change.
+    Applies search text AND status filter together on data.candidates.
+*/
+const applyFilters = () => {
+
+    let filtered = data.candidates;
+
+    // Step 1: filter by search text (name or role)
+    if (activeFilters.search !== '') {
+        const lower = activeFilters.search.toLowerCase();
+        filtered = filtered.filter(c =>
+            c.name.toLowerCase().includes(lower) ||
+            c.role.toLowerCase().includes(lower)
+        );
+    }
+
+    // Step 2: filter by status
+    if (activeFilters.status !== 'all') {
+        filtered = filtered.filter(c => c.status === activeFilters.status);
+    }
+
+    // Step 3: render the result
     renderCandidates(filtered);
+};
+
+
+/*
+    filterCandidates()
+    Called when user types in the search box.
+*/
+const filterCandidates = (searchText) => {
+    activeFilters.search = searchText;
+    applyFilters();
+};
+/*
+    filterByStatus()
+    Called when user clicks a status button.
+    statusValue = 'all' | 'live' | 'eval' | 'soon' | 'scheduled'
+*/
+const filterByStatus = (statusValue, btn) => {
+
+    // Update the active status filter
+    activeFilters.status = statusValue;
+
+    // Highlight the clicked button, un-highlight the others
+    document.querySelectorAll('.status-filter-btn').forEach(b => {
+        b.classList.remove('active-filter');
+    });
+    btn.classList.add('active-filter');
+
+    applyFilters();
 };
 
 
