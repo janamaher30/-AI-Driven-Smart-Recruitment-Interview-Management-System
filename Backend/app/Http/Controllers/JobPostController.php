@@ -46,15 +46,27 @@ class JobPostController extends Controller
     }
 
 
-    public function edit(JobPost $jobPost)
+    public function edit($id)
     {
-        return response()->json([]);
+        $job = JobPost::findOrFail($id); // بيجيب بيانات الوظيفة من الداتابيز
+        return view('jobs.edit', compact('job')); // بيفتح صفحة التعديل ويبعتلها البيانات
     }
 
-
-    public function update(Request $request, JobPost $jobPost)
+    public function update(Request $request, $id)
     {
-        return response()->json([]);
+        // 1. التحقق من البيانات (Validation)
+        $validated = $request->validate([
+            'title' => 'required',
+            'location' => 'required',
+            'salary' => 'required|numeric',
+        ]);
+
+        // 2. تحديث البيانات في الداتابيز
+        $job = JobPost::findOrFail($id);
+        $job->update($validated);
+
+        // 3. الرجوع للداشبورد مع رسالة نجاح (صلب الوظيفة 4)
+        return redirect()->route('dashboard')->with('success', 'تم تحديث بيانات الوظيفة بنجاح يا هندسة! 🚀');
     }
 
     public function destroy(JobPost $jobPost)

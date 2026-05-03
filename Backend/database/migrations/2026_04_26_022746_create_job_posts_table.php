@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->text('description');
             $table->string('location');
             $table->decimal('salary', 10, 2)->nullable();
-            $table->foreignId('admin_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('admin_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

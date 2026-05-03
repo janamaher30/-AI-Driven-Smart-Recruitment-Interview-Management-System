@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport settings make sure the website looks good and scales correctly on mobile phones -->
+    <title>Interviewer Dashboard</title>
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="shell"> <!-- The main container that holds everything (Sidebar + Right Side Content) -->
+        <aside class="sidebar"> <!--SIDEBAR (Left Navigation) has logo area and category labels -->
+            <!-- The top logo area with emoji and portal name -->
+            <div class="sidebar-logo"> 
+                <div class="logo-icon">🎯</div>
+                <div>
+                    <div class="logo-name">Recruitment</div>
+                    <div class="logo-sub">Interview Portal</div>
+                </div>
+            </div>
+
+            <div class="nav-label">Main</div> <!-- Category Label also inside sidebar -->
+            <!-- Clickable navigation links. 'onclick' triggers the JavaScript to change pages -->
+            <a class="nav-link active" onclick="showPage('dashboard', this)">🏠 Dashboard</a>
+            <a class="nav-link" onclick="showPage('candidates', this)">👥 Assigned Candidates <span class="nav-badge" id="badge-candidates">0</span></a>
+            <a class="nav-link" onclick="showPage('interviews', this)">📅 Manage Interviews</a>
+
+            <!-- Gray separation line -->
+            <div class="nav-divider"></div>
+            <div class="nav-label">Actions</div>
+            <!-- More nav links, with ID badges that will be updated by JavaScript -->
+            <a class="nav-link" onclick="showPage('evaluate', this)">📝 Evaluate Candidates <span class="nav-badge" id="badge-evaluate">0</span></a>
+            <a class="nav-link" onclick="showPage('extensions', this)">⏱️ Session Extensions <span class="nav-badge" id="badge-extensions">0</span></a>
+            <a class="nav-link" onclick="showPage('feedback', this)">💬 View Feedback</a>
+
+            <!-- Bottom sidebar section with user info -->
+            <div class="sidebar-footer">
+                <div class="user-row">
+                    <div class="user-avatar" id="user-avatar">--</div> <!-- The user's initials avatar (filled by JavaScript) -->
+                    <div>
+                        <div class="user-name" id="user-name">Loading...</div><!-- The user's name (filled by JavaScript) -->
+                        <div class="user-role">Interviewer</div>
+                    </div>
+                </div>
+                <div class="logout-link">🚪 Log out</div> <!-- Logout link -->
+            </div>
+        </aside>
+
+        <div class="right-panel">
+            <header class="topbar"> <!-- To create Topbar with Breadcrumbs, Date, and Notifications, use header -->
+                <div class="breadcrumb">
+                    <span class="breadcrumb-home">Home</span>
+                    <span class="breadcrumb-sep">/</span>
+                    <span class="breadcrumb-page" id="breadcrumb-text">Dashboard</span>
+                </div>
+                <div class="topbar-right">
+                    <!-- Current date string (filled by JavaScript) -->
+                    <div class="topbar-date" id="topbar-date">📅 ...</div>
+                    <div class="notif-btn">🔔<div class="notif-dot"></div></div>
+                    <div class="topbar-avatar" id="topbar-avatar">--</div>
+                </div>
+            </header>
+
+            <!-- PAGE 1: DASHBOARD-->
+            <main class="page active" id="page-dashboard"> <!--semantic tag. It tells the browser, "This specific box like div, but it contains the most important information on this webpage." It is reserved for the unique content that isn't repeated (like headers or footers).-->
+                <div>
+                    <div class="page-title" id="greeting">Good morning 👋</div>
+                    <div class="page-subtitle" id="dashboard-subtitle">Loading your schedule...</div>
+                </div>
+                <!-- Stats a row div with the four numeric div cards -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-emoji">📅</div>
+                        <div class="stat-label">Today's interviews</div>
+                        <div class="stat-number" id="stat-interviews">--</div>
+                        <div class="stat-hint" id="stat-interviews-hint">...</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-emoji">📝</div>
+                        <div class="stat-label">Pending evaluations</div>
+                        <div class="stat-number" id="stat-evals">--</div>
+                        <div class="stat-hint">Awaiting your review</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-emoji">⏱️</div>
+                        <div class="stat-label">Extension requests</div>
+                        <div class="stat-number" id="stat-extensions">--</div>
+                        <div class="stat-hint">Needs your approval</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-emoji">✅</div>
+                        <div class="stat-label">Completed this week</div>
+                        <div class="stat-number" id="stat-completed">--</div>
+                        <div class="stat-hint" id="stat-completed-hint">...</div>
+                    </div>
+                </div>
+                <!-- Main dashboard divides (two columns) -->
+                <div class="two-col">
+                    <div class="section-card">
+                        <div class="section-head">
+                            <div class="section-title">Today's Interviews</div>
+                            <div class="see-all">See all →</div>
+                        </div>
+                        <!-- Target container for JavaScript to inject interview cards -->
+                        <div id="today-interviews-list"> 
+                            <div class="loading"><div class="spinner"></div> Loading interviews...</div>
+                        </div>
+                    </div>
+                    <!-- Right Column: List of evaluations and extension requests -->
+                    <div class="section-card">
+                        <div class="section-head">
+                            <div class="section-title">Pending Evaluations</div>
+                            <div class="see-all">See all →</div>
+                        </div>
+                        <!-- Target container for JavaScript to inject evaluation rows -->
+                        <div id="pending-evals-list">
+                            <div class="loading"><div class="spinner"></div> Loading...</div>
+                        </div>
+                        <div class="line-sep"></div>
+                        <div class="section-head">
+                            <div class="section-title">Extension Requests</div>
+                        </div>
+                        <!-- Target container for JavaScript to inject extension cards -->
+                        <div id="dashboard-extensions-list">
+                            <div class="loading"><div class="spinner"></div> Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- PAGE 2: CANDIDATES -->
+            <main class="page" id="page-candidates">
+                <div>
+                    <div class="page-title">Assigned Candidates</div>
+                    <div class="page-subtitle" id="candidates-subtitle">Loading...</div>
+                </div>
+                <!-- Action bar with search and filters -->
+                <div class="toolbar">
+                    <div class="search-box">🔍 <input type="text" placeholder="Search candidates..." oninput="filterCandidates(this.value)"></div>
+                    <button class="filter-btn">Filter ▾</button>
+                    <button class="filter-btn">All statuses ▾</button>
+                </div>
+                <!-- Table structure for candidates list -->
+                <div class="table-wrap">
+                    <div class="table-header">
+                        <div class="th">Candidate</div>
+                        <div class="th">Role</div>
+                        <div class="th">Date</div>
+                        <div class="th">Status</div>
+                        <div class="th">Action</div>
+                    </div>
+                    <!-- Target container for JavaScript to inject table rows -->
+                    <div id="candidates-table-body">
+                        <div class="loading"><div class="spinner"></div> Loading candidates...</div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- PAGE 3: INTERVIEWS-->
+            <main class="page" id="page-interviews">
+                <div>
+                    <div class="page-title">Manage Interviews</div>
+                    <div class="page-subtitle">Your full interview schedule this week.</div>
+                </div>
+                <div class="section-card">
+                    <div class="section-head"><div class="section-title">This week</div></div>
+                    <!-- Target container for JavaScript to inject all interview cards -->
+                    <div id="interviews-list">
+                        <div class="loading"><div class="spinner"></div> Loading schedule...</div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- PAGE 4: EVALUATE (The scoring form) -->
+            <main class="page" id="page-evaluate">
+                <div>
+                    <div class="page-title">Evaluate Candidate</div>
+                    <div class="page-subtitle" id="eval-subtitle">Select a candidate to evaluate.</div>
+                </div>
+                <div class="eval-layout">
+
+                    <!-- Left Column: Form Inputs -->
+                    <div class="eval-card">
+                        <div class="eval-header">
+                            <!-- Candidate photo placeholder (filled by JS) -->
+                            <div class="eval-avatar" id="eval-avatar">?</div>
+                            <div>
+                                <div class="eval-name" id="eval-cand-name">No candidate selected</div>
+                                <div class="eval-role" id="eval-cand-role">--</div>
+                                <div class="tag-row" id="eval-tags">
+                                    <!-- Skill tags (filled by JS) -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Technical scoring sliders -->
+                        <div class="skill-group">
+                            <div class="group-title">Technical Skills</div>
+                            <div class="skill-row">
+                                <div class="skill-top"><span class="skill-name">Problem solving</span><span class="skill-score" id="val-ps">5 / 10</span></div>
+                                <!-- Input range (slider). 'oninput' updates the number display next to it instantly -->
+                                <input class="slider" type="range" min="0" max="10" value="5" oninput="document.getElementById('val-ps').textContent = `${this.value} / 10`"/>
+                            </div>
+                            <div class="skill-row">
+                                <div class="skill-top"><span class="skill-name">Code quality</span><span class="skill-score" id="val-cq">5 / 10</span></div>
+                                <input class="slider" type="range" min="0" max="10" value="5" oninput="document.getElementById('val-cq').textContent = `${this.value} / 10`"/>
+                            </div>
+                            <div class="skill-row">
+                                <div class="skill-top"><span class="skill-name">System design</span><span class="skill-score" id="val-sd">5 / 10</span></div>
+                                <input class="slider" type="range" min="0" max="10" value="5" oninput="document.getElementById('val-sd').textContent = `${this.value} / 10`"/>
+                            </div>
+                        </div>
+
+                        <div class="skill-group">
+                            <div class="group-title">Soft Skills</div>
+                            <div class="skill-row">
+                                <div class="skill-top"><span class="skill-name">Communication</span><span class="skill-score" id="val-cm">5 / 10</span></div>
+                                <input class="slider" type="range" min="0" max="10" value="5" oninput="document.getElementById('val-cm').textContent = `${this.value} / 10`"/>
+                            </div>
+                            <div class="skill-row">
+                                <div class="skill-top"><span class="skill-name">Culture fit</span><span class="skill-score" id="val-tf">5 / 10</span></div>
+                                <input class="slider" type="range" min="0" max="10" value="5" oninput="document.getElementById('val-tf').textContent = `${this.value} / 10`"/>
+                            </div>
+                        </div>
+
+                        <!-- Star Rating selection -->
+                        <div class="skill-group">
+                            <div class="group-title">Overall Rating</div>
+                            <div class="stars" id="stars">
+                                <!-- Clicking a star calls the JS 'setStars' function -->
+                                <span class="star" onclick="setStars(1)">★</span>
+                                <span class="star" onclick="setStars(2)">★</span>
+                                <span class="star" onclick="setStars(3)">★</span>
+                                <span class="star" onclick="setStars(4)">★</span>
+                                <span class="star" onclick="setStars(5)">★</span>
+                            </div>
+                        </div>
+
+                        <!-- text area for interviewer notes -->
+                        <div class="skill-group">
+                            <div class="group-title">Comments</div>
+                            <textarea class="textarea" id="eval-comments" placeholder="Write your notes about this candidate..."></textarea>
+                        </div>
+
+                        <!-- Decision buttons (Recommend, Hold, Reject) -->
+                        <div class="skill-group">
+                            <div class="group-title">Hiring Recommendation</div>
+                            <div class="decision-row">
+                                <button class="decision-btn recommend" onclick="selectDecision(this)">✅ Recommend</button>
+                                <button class="decision-btn hold" onclick="selectDecision(this)">⏸ Hold</button>
+                                <button class="decision-btn reject" onclick="selectDecision(this)">❌ Reject</button>
+                            </div>
+                        </div>
+
+                        <!-- Final submission row -->
+                        <div class="submit-row">
+                            <button class="btn-submit" onclick="submitEvaluation()">Submit Evaluation</button>
+                            <button class="btn-draft" onclick="saveDraft()">Save Draft</button>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Resume & Score info from Backend -->
+                    <div class="eval-sidebar">
+                        <div class="sidebar-box">
+                            <div class="box-title">Resume Highlights</div>
+                            <div id="eval-resume"></div>
+                        </div>
+                        <!-- Filled by JS -->
+                        <div class="sidebar-box">
+                            <div class="box-title">Skills on CV</div>
+                            <div class="tag-row" id="eval-cv-skills"></div>
+                        </div>
+                        <div class="sidebar-box">
+                            <div class="box-title">Assessment Score</div>
+                            <div class="score-big" id="eval-score">--</div>
+                            <div class="score-sub" id="eval-score-sub">Not taken yet</div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- PAGE 5: EXTENSIONS -->
+            <main class="page" id="page-extensions">
+                <div>
+                    <div class="page-title">Session Extensions</div>
+                    <div class="page-subtitle">Approve or deny candidate extension requests.</div>
+                </div>
+                <!-- Target container for JavaScript to inject extension cards -->
+                <div class="ext-list" id="extensions-list">
+                    <div class="loading"><div class="spinner"></div> Loading extension requests...</div>
+                </div>
+            </main>
+
+            <!-- PAGE 6: FEEDBACK (History)-->
+            <main class="page" id="page-feedback">
+                <div>
+                    <div class="page-title">Feedback & Evaluations</div>
+                    <div class="page-subtitle">Your submitted evaluations and scores.</div>
+                </div>
+                <!-- Target container for JavaScript to inject summary feedback cards -->
+                <div class="fb-list" id="feedback-list">
+                    <div class="loading"><div class="spinner"></div> Loading feedback...</div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="test.js"></script>
+</body>
+</html>

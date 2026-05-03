@@ -47,7 +47,7 @@
     <div class="card">
         <h2>إضافة وظيفة تجريبية 🛠️</h2>
 
-        <form action="{{ route('jobs.store') }}" method="POST">
+        <form action="/jobs" method="POST">
             @csrf <input type="text" name="title" placeholder="اسم الوظيفة (مثلاً: Cyber Security Intern)" required>
             <textarea name="description" placeholder="وصف الوظيفة" required></textarea>
             <input type="text" name="location" placeholder="الموقع (مثلاً: القاهرة)" required>
