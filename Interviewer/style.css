@@ -1,0 +1,335 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; font-size: 14px; background: #f0f4ff; color: #1a1a2e; }
+:root { /* :root stores "CSS Variables" (nicknames for colors) so we can reuse them easily throughout the code */
+    /*; before root means pseudo-class selects an element based on its "state" or its position in the document.*/
+    /* Root simply tells you: "Start here." to have a global access*/
+    --blue-dark: #1e3a8a;
+    --blue-main: #2563eb;
+    --blue-mid: #3b82f6;
+    --blue-light: #dbeafe;
+    --blue-pale: #eff6ff;
+    --white: #ffffff;
+    --border: #bfdbfe;
+    --gray: #64748b;
+    --gray-light: #94a3b8;
+    --red-light: #fee2e2;
+    --red-text: #991b1b;
+    --yellow-light: #fef9c3;
+    --yellow-text: #854d0e;
+    --green-light: #dcfce7;
+    --green-text: #166534;
+}
+.shell { display: flex; height: 100vh; } /* The .shell is the main div; flex lets us put the sidebar and main content in the horizontal alignment of elements. */
+/* SIDEBAR*/
+.sidebar { width: 220px; background: var(--white); /*var() is a function used to insert the value of a CSS Variable (also known as a "Custom Property") into your code.*/
+    border-right: 1px solid var(--border); display: flex; flex-direction: column; height: 100vh; position: sticky; top: 0; }
+/* The top part of the sidebar where the logo and name sit */
+.sidebar-logo { padding: 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }/*gap: to create space between "child" elements (the items inside a container)*/
+
+/* The blue square behind the emoji logo */
+.logo-icon { width: 36px; height: 36px; background: var(--blue-main); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+/* Formatting the "Recruit AI" text */
+.logo-name { font-size: 15px; font-weight: 600; color: var(--blue-dark); } /*weight gives bold effect*/
+.logo-sub { font-size: 11px; color: var(--gray); }/* Formatting the smaller "Interview Portal" text */
+
+/* Styling for the small uppercase category labels like "MAIN" or "ACTIONS" */
+.nav-label { font-size: 10px; font-weight: 600; color: var(--gray-light); letter-spacing: 0.1em; /*em is flexible and scales based on the font size around it.*/
+    text-transform: uppercase; padding: 16px 20px 6px; }
+
+/* Styling for the clickable navigation links */
+.nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 20px; font-size: 13px; color: var(--gray); cursor: pointer;/*cursosr: tells the browser to change the mouse icon when it hovers over an element.*/
+    border-left: 3px solid transparent; text-decoration: none; }
+.nav-link:hover { background: var(--blue-pale); color: var(--blue-main); }/*color to change the color of the text*/
+/* The "active" link (the page you are currently on) gets a blue highlight on the left */
+.nav-link.active { background: var(--blue-light); color: var(--blue-main); border-left: 3px solid var(--blue-main); font-weight: 500; }
+
+/* The small red circles with numbers next to links (like "0") */
+.nav-badge { margin-left: auto; background: var(--red-light); color: var(--red-text); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px; }
+.nav-divider { height: 1px; background: var(--border); margin: 8px 20px; }
+
+
+.sidebar-footer { margin-top: auto; /*margin-left: auto	All space goes to the Left	Element moves Right*/
+    padding: 16px 20px; border-top: 1px solid var(--border); }
+/* The box containing the user's avatar and name */
+.user-row { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 8px; cursor: pointer; }
+.user-row:hover { background: var(--blue-pale); }
+.user-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--blue-light); color: var(--blue-main); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+.user-name { font-size: 13px; font-weight: 500; color: var(--blue-dark); }
+.user-role { font-size: 11px; color: var(--gray); }
+
+/* Styling for the logout button at the very bottom */
+.logout-link { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 6px 8px; font-size: 12px; color: var(--gray); cursor: pointer; border-radius: 6px; }
+.logout-link:hover { background: var(--blue-pale); color: var(--blue-main); }
+
+
+/* RIGHT PANEL */
+.right-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }/*flex-direction: column = Stack items vertically instead of horizontally,  overflow: hidden = Keep everything inside the box and chop off anything that spills over the edge as it is not imp like the rest of the candidate name.*/
+/* TOPBAR */
+.topbar { height: 56px; background: var(--white); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+/* Styling for the navigation path (e.g., Home / Dashboard) */
+.breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.breadcrumb-home { color: var(--gray-light); }
+.breadcrumb-sep { color: var(--gray-light); }
+.breadcrumb-page { font-weight: 500; color: var(--blue-dark); }
+
+/* Positions the date and bell icon on the right side of the bar */
+.topbar-right { display: flex; align-items: center; gap: 12px; } 
+/* The rounded bubble showing today's date */
+.topbar-date { font-size: 12px; color: var(--gray); background: var(--blue-pale); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; }
+/* Styling for the notification bell button */
+.notif-btn { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); background: var(--white); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; position: relative; } /*position: relative to the nearst child has a specific location*/
+.notif-btn:hover { background: var(--blue-pale); }
+/* The tiny red dot on the bell*/
+.notif-dot { position: absolute; /*leaves its parent div and locates with top,...*/
+    top: 5px; right: 5px; width: 8px; height: 8px; border-radius: 50%; background: #ef4444; border: 2px solid white; }
+/* The avatar circle in the top right corner */
+.topbar-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--blue-light); color: var(--blue-main); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; cursor: pointer; }
+
+
+
+/* PAGES */
+.page { display: none; flex: 1; overflow-y: auto;/*Hide everything by default (display: none).
+When shown, fill the entire available screen (flex: 1).
+If there is too much data, allow scrolling inside that section only (overflow-y: auto).*/
+    padding: 24px; flex-direction: column; gap: 20px; }
+.page.active { display: flex; }
+.page-title { font-size: 20px; font-weight: 600; color: var(--blue-dark); }
+.page-subtitle { font-size: 13px; color: var(--gray); margin-top: 4px; }
+
+/* STAT CARDS*/
+/* A grid layout that puts the 4 stat boxes (interviews, pending, etc.) in a row */
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; } /*1fr: This is the "Fractional Unit." It tells each column to take up one equal part of the available space.*/
+/* Styling for the 4 white boxes containing statistics */
+.stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+.stat-emoji { font-size: 22px; margin-bottom: 8px; }
+.stat-label { font-size: 11px; color: var(--gray); margin-bottom: 4px; }
+.stat-number { font-size: 28px; font-weight: 600; color: var(--blue-dark); line-height: 1; }
+.stat-hint { font-size: 12px; color: var(--gray-light); margin-top: 4px; }
+
+/* TWO COLUMN GRID*/
+/* Splits the dashboard into two equal columns side-by-side */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; } /*1fr 1fr: Means "Split the width into two equal halves".*/
+
+/* SECTION CARD*/
+/* Styling for the main content boxes used for lists and tables */
+.section-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+/* The header area inside a section (e.g., "Today's Interviews" and "See All") */
+.section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.section-title { font-size: 13px; font-weight: 600; color: var(--blue-dark); }
+.see-all { font-size: 12px; color: var(--blue-main); cursor: pointer; }
+.see-all:hover { text-decoration: underline; }
+.line-sep { height: 1px; background: var(--border); margin: 4px 0; }
+
+/* INTERVIEW CARD*/
+/* The horizontal box representing a single interview in a list */
+.interview-card { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer;}
+.interview-card:hover { background: var(--blue-pale); }
+/* The box on the left that shows the time (e.g., 10:00 AM) */
+.time-box { text-align: center; min-width: 44px; }
+.time-big { font-size: 13px; font-weight: 600; color: var(--blue-dark); }
+.time-ampm { font-size: 10px; color: var(--gray-light); }
+
+/* The vertical gray line separating time from candidate info */
+.v-line { width: 1px; height: 34px; background: var(--border); flex-shrink: 0; }/*flex-shrink: 0: "I refuse to shrink. I will keep my size no matter what", defaulf of all is flex-shrink:1*/
+.cand-info { flex: 1; }
+.cand-name { font-size: 13px; font-weight: 500; color: var(--blue-dark); }
+.cand-role { font-size: 11px; color: var(--gray); margin-top: 2px; }
+
+/* BADGES*/
+/* Base style for small labels like "Live now" or "Soon" */
+.badge { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+.badge-live { background: var(--green-light); color: var(--green-text); }
+.badge-soon { background: var(--yellow-light); color: var(--yellow-text); }
+.badge-sched { background: var(--blue-light); color: var(--blue-dark); }
+.badge-eval { background: var(--yellow-light); color: var(--yellow-text); }
+
+/*BUTTONS */
+/* Base style for all buttons in the dashboard */
+.btn { font-size: 12px; font-weight: 500; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border); cursor: pointer; background: var(--white); color: var(--gray); font-family: inherit; white-space: nowrap; }
+.btn:hover { background: var(--blue-pale); }
+/* The main blue button for important actions like "Join" or "Submit" */
+.btn-primary { background: var(--blue-main); border-color: var(--blue-main); color: white; }
+.btn-primary:hover { background: var(--blue-mid); }
+/* Styling for the specific "Approve" button (greenish-blue outline) */
+.btn-approve { font-size: 11px; padding: 5px 12px; border-radius: 7px; border: 1px solid var(--blue-main); background: transparent; color: var(--blue-main); cursor: pointer; font-family: inherit; }
+.btn-approve:hover { background: var(--blue-light); }
+/* Styling for the specific "Deny" button (gray outline) */
+.btn-deny { font-size: 11px; padding: 5px 12px; border-radius: 7px; border: 1px solid var(--border); background: transparent; color: var(--gray); cursor: pointer; font-family: inherit; }
+.btn-deny:hover { background: #f1f5f9; }
+
+
+/* ACTION CARD*/
+/* Similar to interview-card, but used for tasks like "Evaluate" or "Extension" */
+.action-card { display: flex; align-items: center; justify-content: space-between; padding: 12px; border: 1px solid var(--border); border-radius: 10px; gap: 10px; }
+/* Red background for things that need immediate attention */
+.action-card.urgent { border-color: #fca5a5; background: var(--red-light); }
+.action-name { font-size: 13px; font-weight: 500; color: var(--blue-dark); }
+.action-sub { font-size: 11px; color: var(--gray); margin-top: 2px; }
+
+
+/* EMPTY STATE*/
+/* This style is shown when a list is empty (e.g., "No interviews today") */
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; gap: 10px; color: var(--gray-light); text-align: center; }
+.empty-icon { font-size: 36px; }
+.empty-text { font-size: 13px; }
+
+
+/*LOADING SPINNER*/
+/* The container for the spinning circle shown while data loads */
+.loading { display: flex; align-items: center; justify-content: center; padding: 30px; color: var(--gray); font-size: 13px; gap: 10px; }
+.spinner { width: 18px; height: 18px; border: 2px solid var(--blue-light); border-top-color: var(--blue-main); border-radius: 50%; animation: spin 0.8s linear infinite; }/*animation: name,duration,timing function(It means the speed is constant from start to finish.),iteration count.*/
+
+
+/* This defines how the 'spin' animation works (rotates 360 degrees) */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+
+/* CANDIDATES TABLE PAGE*/
+/* The bar containing search and filter buttons above the table */
+.toolbar { display: flex; align-items: center; gap: 10px; }
+.search-box { flex: 1; display: flex; align-items: center; gap: 8px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 0 14px; height: 38px; }
+
+/* Removes the default browser styling from the input field inside the search box */
+.search-box input { border: none; outline: none; font-size: 13px; color: var(--blue-dark); background: transparent; flex: 1; font-family: inherit; }
+/* The buttons that say "Filter" or "Status" */
+.filter-btn { height: 38px; padding: 0 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--white); font-size: 12px; color: var(--gray); cursor: pointer; font-family: inherit; }
+.filter-btn:hover { background: var(--blue-pale); }
+
+/* The container for the whole table (rounded corners) */
+.table-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.table-header { display: grid; grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr; padding: 10px 18px; background: var(--blue-pale); border-bottom: 1px solid var(--border); }
+
+/* Style for the header text (uppercase and small) */
+.th { font-size: 11px; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; }
+.table-row { display: grid; grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr; align-items: center; padding: 13px 18px; border-bottom: 1px solid var(--border); cursor: pointer; }
+.table-row:last-child { border-bottom: none; }
+.table-row:hover { background: var(--blue-pale); }
+
+/* Base style for table cell text */
+.td { font-size: 13px; color: var(--blue-dark); }
+.td-muted { font-size: 12px; color: var(--gray); }/* Lighter text for secondary info like email */
+.td-cand { display: flex; align-items: center; gap: 10px; }/* Layout for the first column containing avatar and name */
+.td-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--blue-light); color: var(--blue-main); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+
+
+/* EVALUATE PAGE*/
+.eval-layout { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start; }/*align-items: start. means: Items align to the Left and only take up the width they need.*/
+.eval-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 22px; }
+.eval-header { display: flex; align-items: center; gap: 14px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+.eval-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--blue-light); color: var(--blue-main); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; }
+.eval-name { font-size: 16px; font-weight: 600; color: var(--blue-dark); }
+.eval-role { font-size: 12px; color: var(--gray); margin-top: 3px; }
+/* A row of skill tags (e.g., [React] [Flutter]) */
+.tag-row { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; } /*flex-wrap: wrap. Items jump to the next row.*/
+.tag { font-size: 11px; padding: 3px 10px; border-radius: 20px; background: var(--blue-light); color: var(--blue-dark); border: 1px solid var(--border); }
+/* Container for a group of sliders (e.g., Technical Skills) */
+.skill-group { display: flex; flex-direction: column; gap: 14px; }
+.group-title { font-size: 11px; font-weight: 600; color: var(--gray-light); text-transform: uppercase; letter-spacing: 0.06em; }
+/* A row containing one slider and its label */
+.skill-row { display: flex; flex-direction: column; gap: 6px; }
+.skill-top { display: flex; justify-content: space-between; align-items: center; }
+.skill-name { font-size: 13px; color: var(--blue-dark); }
+.skill-score { font-size: 13px; font-weight: 600; color: var(--blue-main); }
+.slider { width: 100%; accent-color: var(--blue-main); cursor: pointer; height: 4px; }
+
+/* Container for the 5 stars rating system */
+.stars { display: flex; gap: 4px; }
+.star { font-size: 26px; cursor: pointer; color: #d1d5db; transition: color 0.1s; }/*transition here occurs in the color*/
+.star.filled { color: #f59e0b; }/* Color for stars that have been clicked (filled gold) */
+
+/* The large text box for typing comments */
+.textarea { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 13px; font-family: inherit; color: var(--blue-dark); resize: vertical; min-height: 100px; outline: none; } /* outline: none; means: /* Remove the ugly default ring */
+.textarea:focus { border-color: var(--blue-main); }/*by clicking on it to start writing*/
+/* Row containing Recommend, Hold, and Reject buttons */
+.decision-row { display: flex; gap: 10px; }
+/* Style for decision buttons */
+.decision-btn { flex: 1; padding: 10px; border-radius: 10px; border: 2px solid var(--border); background: var(--white); font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; }
+.decision-btn:hover { background: var(--blue-pale); }
+/*RECOMMEND*/
+.decision-btn.recommend { border-color: #22c55e; color: #166534; }
+.decision-btn.recommend.selected { background: var(--green-light); }
+/*HOLD*/
+.decision-btn.hold { border-color: #f59e0b; color: #854d0e; }
+.decision-btn.hold.selected { background: var(--yellow-light); }
+/*REJECT*/
+.decision-btn.reject { border-color: #ef4444; color: #991b1b; }
+.decision-btn.reject.selected { background: var(--red-light); }
+/*SUBMIT*/
+.submit-row { display: flex; gap: 10px; }
+.btn-submit { flex: 1; padding: 12px; background: var(--blue-main); color: white; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
+.btn-submit:hover { background: var(--blue-mid); }
+/* The gray "Save Draft" button */
+.btn-draft { padding: 12px 20px; background: transparent; color: var(--gray); border: 1px solid var(--border); border-radius: 10px; font-size: 13px; cursor: pointer; font-family: inherit; }
+.btn-draft:hover { background: var(--blue-pale); }
+/* Sidebar container for resume and test score info */
+.eval-sidebar { display: flex; flex-direction: column; gap: 14px; }
+/* Small info boxes in the evaluation sidebar */
+.sidebar-box { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+.box-title { font-size: 13px; font-weight: 600; color: var(--blue-dark); margin-bottom: 12px; }
+/* A single bullet point item for resume highlights */
+.resume-item { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 8px; }
+.resume-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue-main); margin-top: 5px; flex-shrink: 0; }
+.resume-text { font-size: 12px; color: var(--gray); line-height: 1.5; }
+/* Large blue number for the test score (e.g., 84) */
+.score-big { font-size: 36px; font-weight: 600; color: var(--blue-main); line-height: 1; }
+.score-sub { font-size: 12px; color: var(--gray); margin-top: 4px; }
+
+
+/* EXTENSIONS PAGE*/
+/* Container for the list of session extension requests */
+.ext-list { display: flex; flex-direction: column; gap: 12px; }
+/* A single request card for an extension */
+.ext-card { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--blue-main); border-radius: 12px; padding: 18px; display: flex; align-items: center; gap: 16px; }
+/* Changes the left bar color to green if approved */
+.ext-card.approved { border-left-color: #22c55e; }
+.ext-card.denied { border-left-color: #94a3b8; opacity: 0.65; }
+.ext-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--blue-light); color: var(--blue-main); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+.ext-info { flex: 1; }
+.ext-name { font-size: 14px; font-weight: 500; color: var(--blue-dark); }
+.ext-detail { font-size: 12px; color: var(--gray); margin-top: 3px; }
+/* Yellow pill showing the extra time requested (e.g., +15 min) */
+.ext-time { font-size: 12px; font-weight: 600; color: var(--yellow-text); background: var(--yellow-light); border-radius: 20px; padding: 4px 12px; white-space: nowrap; }
+/* Container for Approve/Deny buttons on extension cards */
+.ext-actions { display: flex; gap: 8px; }
+
+/* A label showing the final result of a request */
+.ext-status { font-size: 12px; font-weight: 600; padding: 4px 14px; border-radius: 20px; }
+.ext-status.approved { background: var(--green-light); color: var(--green-text); }
+.ext-status.denied { background: #f1f5f9; color: var(--gray); }
+
+
+/* FEEDBACK PAGE*/
+/* Container for the list of previously submitted feedback */
+.fb-list { display: flex; flex-direction: column; gap: 14px; }
+
+/* A card showing a detailed overview of past feedback */
+.fb-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.fb-top { display: flex; align-items: center; justify-content: space-between; }
+.fb-cand { display: flex; align-items: center; gap: 10px; }
+.fb-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--blue-light); color: var(--blue-main); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+.fb-name { font-size: 13px; font-weight: 600; color: var(--blue-dark); }
+.fb-role { font-size: 11px; color: var(--gray); }
+
+/* Large score displayed in a feedback summary */
+.fb-score-big { font-size: 24px; font-weight: 600; color: var(--blue-main); }
+.fb-score-sub { font-size: 11px; color: var(--gray); }
+
+/* A row showing a bar graph for a skill score */
+.bar-row { display: flex; align-items: center; gap: 10px; }
+.bar-label { font-size: 12px; color: var(--gray); width: 130px; flex-shrink: 0; }
+/* The light blue track (background) of the bar */
+.bar-track { flex: 1; height: 7px; background: var(--blue-light); border-radius: 20px; overflow: hidden; }
+
+/* The darker blue fill representing the actual score percentage */
+.bar-fill { height: 100%; background: var(--blue-main); border-radius: 20px; }
+.bar-val { font-size: 12px; font-weight: 600; color: var(--gray); width: 26px; text-align: right; }
+/* A blue-bordered box for the written text notes */
+.fb-note { font-size: 12px; color: var(--gray); line-height: 1.6; background: var(--blue-pale); border-left: 3px solid var(--blue-main); border-radius: 6px; padding: 10px 14px; }
+/* Bottom area of feedback card showing decision and date */
+.fb-footer { display: flex; align-items: center; justify-content: space-between; }
+
+/* Pill-shaped badge for the final recommendation result */
+.decision-chip { font-size: 11px; font-weight: 600; padding: 3px 12px; border-radius: 20px; }
+.chip-recommend { background: var(--green-light); color: var(--green-text); }
+.chip-hold { background: var(--yellow-light); color: var(--yellow-text); }
+.fb-date { font-size: 11px; color: var(--gray-light); }
