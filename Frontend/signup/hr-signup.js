@@ -12,6 +12,8 @@ const setupHrToggle = (btnId, inputId) => {
 };
 setupHrToggle('#toggleHrPass', '#hrPassword');
 setupHrToggle('#toggleHrConfirm', '#hrConfirmPassword');
+const API_BASE = 'http://127.0.0.1:8000/api';
+
 document.getElementById('hrSignupForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const pass = document.getElementById('hrPassword').value;
@@ -29,19 +31,34 @@ document.getElementById('hrSignupForm').addEventListener('submit', function(e) {
     }
     const hrData = {
         name: document.getElementById('hrFullName').value,
-        Id: document.getElementById('Id').value,
         email: document.getElementById('hrEmail').value,
-        dept: document.getElementById('department').value,
-        role: 'HR_Admin'
+        password: pass,
+        password_confirmation: confirm,
+        role: 'hr_admin'
     };
     btn.disabled = true;
     loader.classList.remove('d-none');
     txt.textContent = "Verifying Identity...";
-    console.log("HR Registration Data:", hrData);
-    setTimeout(() => {
-        alert("Admin Access Granted!");
-        btn.disabled = false;
-        loader.classList.add('d-none');
-        txt.textContent = "Authorize & Register";
-    }, 2000);
+    fetch(API_BASE + '/auth/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(hrData)
+    })
+        .then(async (res) => {
+            const payload = await res.json();
+            if (!res.ok) throw new Error(payload.message || 'Registration failed');
+            alert('HR account created successfully.');
+            window.location.href = '../Login/login.html';
+        })
+        .catch((err) => {
+            alert(err.message);
+        })
+        .finally(() => {
+            btn.disabled = false;
+            loader.classList.add('d-none');
+            txt.textContent = "Authorize & Register";
+        });
 });

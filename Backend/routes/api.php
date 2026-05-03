@@ -5,6 +5,7 @@ use App\Http\Controllers\ProctoringController;
 use App\Http\Controllers\SessionExtensionController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\LiveCodingController;
+use App\Http\Controllers\FrontendApiController;
 
 // ─────────────────────────────────────────────
 // PROCTORING & ANTI-CHEATING ROUTES (UC-08)
@@ -90,3 +91,18 @@ Route::prefix('live-coding')->group(function () {
     Route::get('/session', [LiveCodingController::class, 'getSessionDetails']);
 
 });
+
+// ─────────────────────────────────────────────
+// FRONTEND INTEGRATION ROUTES
+// ─────────────────────────────────────────────
+Route::prefix('auth')->group(function () {
+    Route::post('/login', [FrontendApiController::class, 'login']);
+    Route::post('/register', [FrontendApiController::class, 'register']);
+});
+
+Route::get('/jobs', [FrontendApiController::class, 'jobs']);
+Route::get('/interviews', [FrontendApiController::class, 'interviews']);
+Route::post('/interviews/reschedule', [FrontendApiController::class, 'rescheduleInterview']);
+Route::get('/candidate/dashboard', [FrontendApiController::class, 'candidateDashboard']);
+Route::get('/interviewer/dashboard', [FrontendApiController::class, 'interviewerDashboard']);
+Route::get('/candidates/pipeline', [FrontendApiController::class, 'candidatesPipeline']);

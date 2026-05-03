@@ -107,6 +107,28 @@ class ProctoringController extends Controller
         return response()->json(['message' => 'Submitted successfully', 'status' => $assessment->status], 200);
     }
 
+    // --- heartbeat timer check ---
+    public function checkTimer(Request $request)
+    {
+        $request->validate([
+            'assessmentId' => 'required',
+        ]);
+
+        $assessment = Assessment::where('id', $request->assessmentId)->first();
+        if (!$assessment) {
+            return response()->json(['message' => 'Assessment not found'], 404);
+        }
+
+        $expired = Carbon::now()->greaterThan(Carbon::parse($assessment->endTime));
+
+        return response()->json([
+            'assessmentId' => $assessment->id,
+            'expired' => $expired,
+            'endTime' => $assessment->endTime,
+            'status' => $assessment->status,
+        ], 200);
+    }
+
     // --- عرض الامتحانات المشبوهة للأدمن ---
     public function getFlaggedAssessments()
     {

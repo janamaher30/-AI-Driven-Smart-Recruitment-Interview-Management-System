@@ -12,6 +12,8 @@ const setupIntToggle = (btnId, inputId) => {
 };
 setupIntToggle('#toggleIntPass', '#intPass');
 setupIntToggle('#toggleIntConfirm', '#intConfirmPass');
+const API_BASE = 'http://127.0.0.1:8000/api';
+
 document.getElementById('interviewerForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const pass = document.getElementById('intPass').value;
@@ -29,19 +31,34 @@ document.getElementById('interviewerForm').addEventListener('submit', function(e
     }
     const interviewerData = {
         name: document.getElementById('intName').value,
-        expYears: document.getElementById('experience').value,
-        field: document.getElementById('expertise').value,
         email: document.getElementById('intEmail').value,
-        role: 'Technical_Interviewer'
+        password: pass,
+        password_confirmation: confirm,
+        role: 'interviewer'
     };
     btn.disabled = true;
     loader.classList.remove('d-none');
     txt.textContent = "Processing Application...";
-    console.log("Interviewer Data:", interviewerData);
-    setTimeout(() => {
-        alert("Welcome to the Panel, Expert!");
-        btn.disabled = false;
-        loader.classList.add('d-none');
-        txt.textContent = "Join Expert Panel";
-    }, 2000);
+    fetch(API_BASE + '/auth/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(interviewerData)
+    })
+        .then(async (res) => {
+            const payload = await res.json();
+            if (!res.ok) throw new Error(payload.message || 'Registration failed');
+            alert('Interviewer account created successfully.');
+            window.location.href = '../Login/login.html';
+        })
+        .catch((err) => {
+            alert(err.message);
+        })
+        .finally(() => {
+            btn.disabled = false;
+            loader.classList.add('d-none');
+            txt.textContent = "Join us";
+        });
 });

@@ -1,5 +1,7 @@
 const togglePassword = document.querySelector('#togglePassword');
 const password = document.querySelector('#password');
+const API_BASE = 'http://127.0.0.1:8000/api';
+
 togglePassword.addEventListener('click', function () {
     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
     password.setAttribute('type', type);
@@ -12,8 +14,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const email = document.getElementById('email').value;
     const pass = document.getElementById('password').value;
     const role = document.getElementById('userRole').value;
-    const loginBtn = document.getElementById('loginBtn');
-    const loader = document.getElementById('loader');
+    const loginBtn = form.querySelector('button[type="submit"]');
     if (!form.checkValidity()) {
         e.stopPropagation();
         form.classList.add('was-validated');
@@ -25,11 +26,29 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         role: role
     };
     loginBtn.disabled = true;
-    loader.classList.remove('d-none');
-    console.log("Sending data to Backend:", loginData);
-    setTimeout(() => {
-        alert(`Login attempt as ${role}. Backend will verify this.`);
-        loginBtn.disabled = false;
-        loader.classList.add('d-none');
-    }, 1500);
+    loginBtn.textContent = 'Signing in...';
+
+    fetch(API_BASE + '/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(loginData)
+    })
+        .then(async (res) => {
+            const payload = await res.json();
+            if (!res.ok) throw new Error(payload.message || 'Login failed');
+            localStorage.setItem('authToken', payload.token);
+            localStorage.setItem('currentUser', JSON.stringify(payload.user));
+            alert('Login successful');
+            window.location.href = '../main.html';
+        })
+        .catch((err) => {
+            alert(err.message);
+        })
+        .finally(() => {
+            loginBtn.disabled = false;
+            loginBtn.textContent = 'Sign In';
+        });
 });

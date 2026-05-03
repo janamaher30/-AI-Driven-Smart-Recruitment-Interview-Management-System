@@ -12,6 +12,8 @@ const setupToggle = (btnId, inputId) => {
 };
 setupToggle('#togglePassword', '#password');
 setupToggle('#toggleConfirmPassword', '#confirmPassword');
+const API_BASE = 'http://127.0.0.1:8000/api';
+
 document.getElementById('signupForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const form = e.target;
@@ -30,21 +32,35 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
         return;
     }
     const formData = {
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
+        name: `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`.trim(),
         email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        linkedin: document.getElementById('linkedin').value,
-        password: pass
+        password: pass,
+        password_confirmation: confirmPass,
+        role: 'candidate'
     };
     signupBtn.disabled = true;
     loader.classList.remove('d-none');
     btnText.textContent = "Creating Account...";
-    console.log("Data to Backend:", formData);
-    setTimeout(() => {
-        alert("Success! Account created.");
-        signupBtn.disabled = false;
-        loader.classList.add('d-none');
-        btnText.textContent = "Create Profile";
-    }, 2000);
+    fetch(API_BASE + '/auth/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+        .then(async (res) => {
+            const payload = await res.json();
+            if (!res.ok) throw new Error(payload.message || 'Registration failed');
+            alert('Account created successfully. Please sign in.');
+            window.location.href = '../Login/login.html';
+        })
+        .catch((err) => {
+            alert(err.message);
+        })
+        .finally(() => {
+            signupBtn.disabled = false;
+            loader.classList.add('d-none');
+            btnText.textContent = "Create Profile";
+        });
 });

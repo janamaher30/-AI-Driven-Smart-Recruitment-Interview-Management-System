@@ -1,4 +1,4 @@
-const API_BASE = "../../Backend/routes/api.php";
+const API_BASE = "http://127.0.0.1:8000/api";
 
 async function apiRequest(url, method = "GET", body = null) {
     const options = {
@@ -14,10 +14,11 @@ async function apiRequest(url, method = "GET", body = null) {
     }
 
     const res = await fetch(API_BASE + url, options);
+    const payload = await res.json();
 
     if (!res.ok) {
-        throw new Error("API Error: " + res.status);
+        throw new Error(payload.message || ("API Error: " + res.status));
     }
 
-    return await res.json();
+    return payload;
 }
